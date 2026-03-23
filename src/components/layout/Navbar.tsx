@@ -1,0 +1,149 @@
+"use client";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+
+import { headerMenu } from "@/src/helper/dataFormat";
+import { logoConstant } from "@/src/helper/constantData";
+
+//Variants cho Drawer Animation (Mở từ trái sang phải)
+const drawerVariants: Variants = {
+  initial: { x: "-100%" }, // Nằm ngoài màn hình bên trái
+  animate: { 
+    x: 0, 
+    transition: { type: "tween", duration: 0.4, ease: "easeOut" } 
+  },
+  exit: { 
+    x: "-100%",
+    transition: { type: "tween", duration: 0.3, ease: "easeIn" } 
+  },
+};
+
+// Variants cho Backdrop
+const backdropVariants = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
+
+export default function Navbar() {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  // 3. Xử lý logic check Desktop/Mobile
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 992); // lg breakpoint của Bootstrap
+      if (window.innerWidth >= 992) setIsDrawerOpen(false); // Đóng drawer nếu mở desktop
+    };
+    handleResize(); // Chạy khi component mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const toggleDrawer = () => setIsDrawerOpen(!isDrawerOpen);
+
+  return (
+    <>
+      <div className="d-flex justify-content-between align-items-center py-2">
+        {/* LOGO */}
+        <Link href="/">
+          <Image 
+            src={logoConstant.src} // Đặt logo vào đây
+            alt={logoConstant.alt}
+            className="img-fluid" 
+            style={{ objectFit: "contain", borderRadius: "50%" }}
+            width={logoConstant.width} // Tăng kích thước logo
+            height={logoConstant.height}
+            priority
+          />
+        </Link>
+
+        {!isDesktop && (
+          <div onClick={toggleDrawer} className="p-3">
+            <FontAwesomeIcon 
+              icon={isDrawerOpen ? faXmark : faBars} 
+              className="fs-1" 
+            />
+          </div>
+        )}
+
+        {isDesktop && (
+          <ul className="d-flex h-100 align-items-center m-0 p-0 list-unstyled gap-4 fw-bold fs-5">
+            {headerMenu().map((link) => (
+              <li key={link.name} className="px-2">
+                <Link href={link.link} className="nav-link text-decoration-none">
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+
+      {/* Mobile Drawer Menu */}
+      <AnimatePresence>
+        {isDrawerOpen && (
+          <>
+            {/* Backdrop (Lớp phủ đen mờ) */}
+            <motion.div
+              variants={backdropVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="drawer-backdrop z-4 vh-100 vw-100 fixed-top"
+              onClick={toggleDrawer} // Đóng drawer khi click backdrop
+            />
+
+            {/* Drawer Panel */}
+            <motion.div
+              variants={drawerVariants}
+              initial="initial"
+              animate="animate"
+              exit="exit"
+              className="drawer-panel z-5 vh-100 fixed-top bg-white shadow-lg p-0"
+              style={{ width: "280px" }} // Độ rộng drawer
+            >
+              <div className="d-flex flex-column h-100 p-0 m-0 w-100">
+                {/* Drawer Header (Logo + Nút Đóng) */}
+                <div className="drawer-header px-3 py-2 border-bottom d-flex justify-content-between align-items-center w-100">
+                  <Image 
+                    src={logoConstant.src} 
+                    alt={logoConstant.alt} 
+                    width={logoConstant.width} 
+                    height={logoConstant.height} 
+                    className="rounded-circle"
+                  />
+                  <button 
+                    onClick={toggleDrawer} 
+                    className="btn-close fs-4" 
+                    aria-label="Close"
+                  >
+                    <FontAwesomeIcon 
+                      icon={faXmark} 
+                      className="fs-2 text-dark" 
+                    />
+                  </button>
+                </div>
+
+                {/* Drawer Body (Menu Items - Thêm accordion sau nếu cần) */}
+                <ul className="list-unstyled">
+                  {headerMenu().map((link) => (
+                    <li key={link.name} className="drawer-item p-0 m-0 w-100 border-bottom">
+                      <Link href={link.link} className="d-block px-4 py-3 text-black text-decoration-none fw-bold fs-5">
+                        {link.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}

@@ -1,0 +1,41 @@
+.pointer {
+  cursor: pointer;
+}
+.box-shadow{
+  box-shadow: 0 1px 6px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Title cấp 1 */
+.title-category{
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Title cấp 2 */
+.title-product{
+  font-weight: bold;
+  font-size: 16px;
+  padding: 10px
+}
+
+.tilte-footer{
+  font-size: 16px;
+}
+
+.arrow-collapse {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-right: 4px solid currentColor;
+  border-bottom: 4px solid currentColor;
+  transform: rotate(45deg); /* mũi tên xuống */
+  transition: transform 0.5s ease;
+}
+
+[aria-expanded="true"] .arrow-collapse {
+  transform: rotate(-135deg); /* mũi tên lên */
+}
