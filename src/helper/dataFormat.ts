@@ -16,7 +16,7 @@ export const footerCollections = (data:any[] = []): FooterCollectionInterface[] 
 		{
 			'title': 'Kokoria - món ngon chuẩn Hàn',
 			'rows': [
-				"Địa chỉ: abc xzy",
+				"Địa chỉ: 207/33 Ba tháng hai, Phường 11, Quận 10",
 				"Các thông tin khác",
 				"Phương thức liên hệ"
 			],
@@ -41,8 +41,8 @@ export interface HeaderMenuInterface {
 export const headerMenu = (data: any[] = []): HeaderMenuInterface[] => {
     return [
         { name: 'Trang chủ', link: '/' },
-        { name: 'Sản phẩm', link: '/products' },
-        { name: 'Giới thiệu', link: '/about' },
+        // { name: 'Sản phẩm', link: '/products' },
+        // { name: 'Giới thiệu', link: '/about' },
         { name: 'Liên hệ', link: '/contact' }
     ]
 }
