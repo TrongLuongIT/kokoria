@@ -8,6 +8,6 @@ export interface LogoConstantInterface {
 export const logoConstant: LogoConstantInterface = {
   src: "/images/layout/logo.jpg",
   alt: "Kokoria Logo",
-  width: 75,
-  height: 75,
+  width: 50,
+  height: 50,
 };

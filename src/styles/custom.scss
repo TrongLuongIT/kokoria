@@ -1,24 +1,43 @@
-@use "bootstrap/scss/bootstrap";
+$border-radius: 0.3rem;
+
+@import "bootstrap/scss/bootstrap";
 @import "bootstrap-icons/font/bootstrap-icons.css";
 
 // Brand colors config
+// $brand-color-1: #ee742c;
+// $brand-background: #f37338;
+
 $brand-color-1: #ee742c;
-$brand-background: #fe771b;
-$brand-text: white;
+$brand-background: white;
+$brand-background-2: #f37338;
+$brand-background-3: #176ca1;
+$brand-background-4: #85c1e1;
+
+
+$brand-text: rgb(34, 30, 30);
 $brand-text-hover: darken($brand-text, 20%);
+$brand-text-2: white;
+$brand-text-2-hover: darken($brand-text-2, 20%);
 
-$brand-color-red: #ff3d00;
+$brand-color-red: #ff2d26;
 
+/* COLOR LAYOUT */
 body{
   background-color: $brand-background;
   color: $brand-text;
 }
 
+.background-brand {
+  background-color: $brand-background;
+} 
+
 .nav-link{
-  color: $brand-text !important;
-  
+  color: $brand-text-2 !important;
   &:hover{
-    color: $brand-text-hover !important;
+    // color: $brand-text-2-hover !important;
+    // box-shadow: 0 0 15px 5px rgba(255, 255, 255, 0.8);
+    // transform: translateY(-4px);
+    text-shadow: 0px 0 10px rgb(214 22 193);
   }
 }
 
@@ -26,63 +45,27 @@ body{
   position: sticky;
   bottom: 0;
   z-index: 2;
+  background-color: darken($brand-background-2, 10%);
+  color: $brand-text-2;
 }
 
 .sticky-header{
   position: sticky;
   top: 0;
   z-index: 4;
-  background-color: $brand-background
+  background-color: $brand-background-2;
 }
+
+/* END COLOR LAYOUT */
 
 .title-brand-1 {
   @extend .display-1;
 }
 
-
-.btn-slider {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  z-index: 10;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.btn-slider:hover { background: #e63946; }
-.btn-slider.start { left: 20px; }
-.btn-slider.end { right: 20px; }
 .transition-all { transition: all 0.3s ease; }
 
-
-//NAVBAR MOBILE
-.hybrid-header {
-  height: var(--header-height);
-}
-
-/* DESKTOP NAV CUSTOM */
-.desktop-nav .nav-item-desktop {
-  position: relative;
-}
-.desktop-nav .nav-item-desktop:hover::after {
-  content: "";
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: #dc3545; /* Màu đỏ Kokoria */
-}
 .desktop-nav .nav-link {
   transition: color 0.3s ease;
-}
-.desktop-nav .nav-item-desktop:hover .nav-link {
-  color: #dc3545 !important;
 }
 
 /* DRAWER CUSTOM */
@@ -97,37 +80,47 @@ body{
   background: none;
 }
 
-/* HAMBURGER BOX CUSTOM */
-.btn-hamburger {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-.hamburger-box {
-  position: relative;
-  width: 24px;
-  height: 20px;
-  margin: 0 auto;
-}
-.hamburger-inner,
-.hamburger-inner::before,
-.hamburger-inner::after {
-  position: absolute;
-  width: 24px;
-  height: 2px;
-  background-color: black;
-  border-radius: 4px;
-  transition: transform 0.15s ease;
-}
-.hamburger-inner {
-  top: 50%;
-  display: block;
-  margin-top: -1px;
-}
-.hamburger-inner::before { content: ""; top: -8px; }
-.hamburger-inner::after { content: ""; bottom: -8px; }
+.brand-hotline{
+  color: $brand-text-2;
+  font-size: 36px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 
-/* Mở */
-.hamburger-box.open .hamburger-inner { background-color: transparent !important; }
-.hamburger-box.open .hamburger-inner::before { transform: translate3d(0, 8px, 0) rotate(45deg); }
-.hamburger-box.open .hamburger-inner::after { transform: translate3d(0, -8px, 0) rotate(-45deg); }
+  @media screen and (max-width: 1024px) {
+    font-size: 18px;
+  }
+}
+
+// WAVY TEXT
+@keyframes wavyAnim {
+  0% {
+    transform: translateY(-10px);
+  }
+  10% {
+    transform: translateY(10px);
+  }
+  20%{
+    transform: translateY(-5px);
+  }
+  30%, 95% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-10px); /* Đẩy chữ lên trên */
+  }
+}
+
+.wavy-text span{
+  display: inline-block;
+  animation: 3s ease-in-out 0s infinite normal both running wavyAnim;
+  animation-delay: calc(var(--i) * 0.1s);
+}
+
+.dot-point{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid black;
+}

@@ -16,19 +16,11 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      <div className="container">
+      <div className="container-fluid">
         <div className="row">
-          <div className="col-md-6">
-            <StoreInfor />
-          </div>
-          <div className="col-md-6">
-            <ContactForm />
-          </div>
+          <BrandReason />
+          <BranchStory />
         </div>
-      </div>
-      <div className="row">
-        <BrandReason />
-        <BranchStory />
       </div>
     </>
   );

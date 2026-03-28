@@ -5,33 +5,43 @@ import { motion } from "framer-motion";
 interface ImageCardProps {
   src: string;
   alt: string;
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
+  ratio?: string;
+  children?: React.ReactNode;
+  className?: string;
 }
 
-export default function ImageCard({ src, alt, title, description }: ImageCardProps) {
+export default function ImageCard({
+  src, alt, title,
+  description,
+  ratio="1/1",
+  children,
+  className
+}: ImageCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: false, margin: "-50px" }}
       transition={{ duration: 0.8 }}
-      className="w-100 h-100"
+      className="w-100"
     >
       <div 
-        className="position-relative w-100 rounded overflow-hidden shadow-sm"
-        style={{ aspectRatio: '1/1' }}
+        className="position-relative w-100 rounded overflow-hidden"
+        style={{ aspectRatio: ratio }}
       >
         <Image
           src={src}
           alt={alt}
           fill
-          className="object-fit-cover"
+          className={`object-fit-cover ` + className}
         />
+        {children || null}
       </div>
       <div>
-        <h3 className="text-truncate">{title}</h3>
-        <p>{description}</p>
+        <h3 className="text-truncate mt-2">{title || ''}</h3>
+        <p>{description || ''}</p>
       </div>
     </motion.div>
   );

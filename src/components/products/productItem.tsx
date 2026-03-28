@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import ImageCard from "../common/ImageCard";
 
 export interface ProductItemProps {
   product: {
@@ -21,16 +22,13 @@ export default function ProductItem({ product }: ProductItemProps){
 
   return (
     <div className="col-6 col-md-3 mt-4" key={product.id}>
-      <div className="box-shadow pointer" onClick={onClickMenu}>
-        <Image
+      <div className="pointer" onClick={onClickMenu}>
+        <ImageCard 
           src={product.image}
           alt={product.name}
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: "100%", height: "auto" }}
+          title={product.name}
+          className="box-shadow"
         />
-        <div className="title-product p-2 text-truncate" title={product.name}>{product.name}</div>
       </div>
     </div>
   )

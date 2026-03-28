@@ -98,19 +98,13 @@ export default function ImageSlider({ images }: SliderProps) {
           <div
             key={index}
             onClick={() => goToPage(index)}
-            className={`mx-2 border-0 rounded-circle transition-all ${
-              index === imageIndex ? "bg-danger" : "bg-white opacity-50"
+            className={`mx-2 rounded-circle transition-all dot-point ${
+              index === imageIndex ? "bg-danger border-0" : "opacity-50"
             }`}
-            style={{ 
-              width: 20, 
-              height: 20,
-              cursor: "pointer"
-            }}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-
     </div>
   );
 }

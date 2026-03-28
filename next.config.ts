@@ -8,7 +8,10 @@ const nextConfig: NextConfig = {
       "picsum.photos",
       "https://images.unsplash.com",
       "images.unsplash.com",
-      "shop.vinfastauto.com"
+      "shop.vinfastauto.com",
+      "p9-sign-sg.tiktokcdn.com",
+      "p16-common-sign.tiktokcdn.com",
+      "p16-sign-sg.tiktokcdn.com"
     ],
   },
 };

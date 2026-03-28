@@ -31,7 +31,7 @@ const backdropVariants = {
 
 export default function Navbar() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   // 3. Xử lý logic check Desktop/Mobile
   useEffect(() => {
@@ -48,13 +48,23 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="d-flex justify-content-between align-items-center py-2">
+      <div className="d-flex justify-content-between align-items-center py-2 py-md-3">
+
+        {!isDesktop && (
+          <div onClick={toggleDrawer} className="p-2">
+            <FontAwesomeIcon 
+              icon={isDrawerOpen ? faXmark : faBars} 
+              className="fs-1 text-white" 
+            />
+          </div>
+        )}
+
         {/* LOGO */}
         <Link href="/">
           <Image 
             src={logoConstant.src} // Đặt logo vào đây
             alt={logoConstant.alt}
-            className="img-fluid" 
+            className="img-fluid img-logo" 
             style={{ objectFit: "contain", borderRadius: "50%" }}
             width={logoConstant.width} // Tăng kích thước logo
             height={logoConstant.height}
@@ -62,20 +72,11 @@ export default function Navbar() {
           />
         </Link>
 
-        {!isDesktop && (
-          <div onClick={toggleDrawer} className="p-3">
-            <FontAwesomeIcon 
-              icon={isDrawerOpen ? faXmark : faBars} 
-              className="fs-1" 
-            />
-          </div>
-        )}
-
         {isDesktop && (
           <ul className="d-flex h-100 align-items-center m-0 p-0 list-unstyled gap-4 fw-bold fs-5">
             {headerMenu().map((link) => (
-              <li key={link.name} className="px-2">
-                <Link href={link.link} className="nav-link text-decoration-none">
+              <li key={link.name}>
+                <Link href={link.link} className="nav-link text-decoration-none p-2">
                   {link.name}
                 </Link>
               </li>

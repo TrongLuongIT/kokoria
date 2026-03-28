@@ -1,81 +1,16 @@
 import apiClient from "./api-client";
 import { cache } from "react";
 
-export interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  description: string;
-}
+import { ProductInterface, listProduct } from "@/src/helper/dataFormat";
 
 export const ProductService = {
 
-  // mockup data, có data thật thì hủy code này
-  getAllMock: cache(async (): Promise<Product[]> => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Giả lập độ trễ mạng
-    return MOCK_PRODUCTS;
-  }),
-
-  getByIdMock: cache(async (id: number): Promise<Product | undefined> => {
-    await new Promise((resolve) => setTimeout(resolve, 1000)); // Giả lập độ trễ mạng
-    return MOCK_PRODUCTS.find((product) => product.id === id);
-  }),
-
   // Dùng cache để tối ưu hiệu năng trên Server
-  getAll: cache(async (): Promise<Product[]> => {
-    return apiClient.get("/products");
-  }),
-
-  getById: cache(async (id: string): Promise<Product> => {
-    return apiClient.get(`/products/${id}`);
+  getAll: cache(async (): Promise<ProductInterface[]> => {
+    const response = await apiClient.get("/products");
+    return listProduct();
   }),
 };
-
-export const MOCK_PRODUCTS: Product[] = [
-  {
-    id: 1,
-    name: "iPhone 15 Pro Max 256GB",
-    price: 29990000,
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=800&auto=format&fit=crop",
-    description: "Chip A17 Pro mạnh mẽ, camera 48MP zoom quang học 5x.",
-  },
-  {
-    id: 2,
-    name: "MacBook Pro M3 14 inch",
-    price: 39990000,
-    image: "https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?q=80&w=800&auto=format&fit=crop",
-    description: "Màn hình Liquid Retina XDR, hiệu năng vượt trội cho đồ họa.",
-  },
-  {
-    id: 3,
-    name: "Apple Watch Ultra 2",
-    price: 21490000,
-    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop",
-    description: "Vỏ titan bền bỉ, GPS tần số kép chính xác nhất.",
-  },
-  {
-    id: 4,
-    name: "AirPods Pro Gen 2 (USB-C)",
-    price: 5990000,
-    image: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?q=80&w=800&auto=format&fit=crop",
-    description: "Chống ồn chủ động gấp 2 lần, âm thanh thích ứng.",
-  },
-  {
-    id: 5,
-    name: "iPad Pro M2 12.9 inch",
-    price: 31990000,
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?q=80&w=800&auto=format&fit=crop",
-    description: "Trải nghiệm Apple Pencil di chuột, màn hình Mini-LED.",
-  },
-  {
-    id: 6,
-    name: "Magic Mouse - Black",
-    price: 2490000,
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?q=80&w=800&auto=format&fit=crop",
-    description: "Thiết kế tối giản, hỗ trợ cử chỉ Multi-Touch.",
-  },
-];
 
 interface MockImage {
   id: number;

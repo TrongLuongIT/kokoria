@@ -1,5 +1,5 @@
 import { ProductService } from "@/src/services/product-service";
-import ProductItem from "./productItem";
+import ProductItem from "./ProductItem";
 
 export default async function ProductList() {
 
