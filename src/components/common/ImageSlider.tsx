@@ -60,7 +60,7 @@ export default function ImageSlider({ images }: SliderProps) {
   }, [paginate]);
  
   return (
-    <div className="position-relative overflow-hidden w-100" style={{ height: "auto", aspectRatio: "16/9" }}>
+    <div className="position-relative overflow-hidden w-100" style={{ height: "auto", aspectRatio: "18/9" }}>
       <AnimatePresence initial={false} custom={direction} mode="popLayout">
         <motion.div
           key={page}
@@ -70,12 +70,12 @@ export default function ImageSlider({ images }: SliderProps) {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: "spring", stiffness: 80, damping: 25 }, // Chạy cực mượt và có độ đầm
+            x: { type: "spring", stiffness: 80, damping: 25 }, 
             opacity: { duration: 0.5 }
           }}
           className="w-100 h-auto"
           style={{
-            position: "absolute",// page === 0 ? "relative" : "absolute", // Mẹo để giữ chiều cao ban đầu
+            position: "absolute",
             top: 0,
             left: 0
           }}

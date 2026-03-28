@@ -24,7 +24,7 @@ export default function RootLayout({
         <Header/>
         <Toaster position="top-right" richColors closeButton/>
 
-        <main className="container-fluid px-0 mb-4">
+        <main className="container-fluid px-0">
           {children}
         </main>
 

@@ -6,10 +6,10 @@ import ImageCard from "@/src/components/common/ImageCard";
 
 export default function BrandReason() {
   return (
-    <div className="bg-light">
-      <div className="container ">
+    <div className="dark-mode">
+      <div className="container">
         <div className="row pt-5 mt-3 pb-4">
-          <div className="col title-brand-1">
+          <div className="col title-category">
             <div className="text-danger fw-bold text-uppercase">Kokoria ?</div>
             <div>Tại sao chọn chúng tôi?</div>
           </div>

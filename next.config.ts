@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  sassOptions: {
+    // Tắt các cảnh báo từ thư viện bên thứ 3 (như Bootstrap)
+    quietDeps: true, 
+  },
   /* config options here */
   images: {
     domains: [

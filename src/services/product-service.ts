@@ -7,7 +7,7 @@ export const ProductService = {
 
   // Dùng cache để tối ưu hiệu năng trên Server
   getAll: cache(async (): Promise<ProductInterface[]> => {
-    const response = await apiClient.get("/products");
+    // const response = await apiClient.get("/products");
     return listProduct();
   }),
 };

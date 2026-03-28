@@ -6,22 +6,22 @@ import BranchStory from "./component/branchStory";
 export default function ContactPage() {
   return (
     <>
-      <div className="container">
-        <div className="row">
-          <div className="col-md-6">
-            <StoreInfor />
-          </div>
-          <div className="col-md-6">
-            <ContactForm />
+      <BranchStory />
+      
+      <div className="py-5">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <StoreInfor />
+            </div>
+            <div className="col-md-6">
+              <ContactForm />
+            </div>
           </div>
         </div>
       </div>
-      <div className="container-fluid">
-        <div className="row">
-          <BrandReason />
-          <BranchStory />
-        </div>
-      </div>
+
+      <BrandReason />
     </>
   );
 }
